@@ -1,0 +1,8 @@
+{
+  "name": "branch-guard",
+  "version": "1.0.0",
+  "description": "Warns when a Claude Code session is resumed on a different git branch than the one it last ran on.",
+  "author": {
+    "name": "Enrico Sabbadin"
+  }
+}

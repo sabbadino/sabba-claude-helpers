@@ -1,0 +1,19 @@
+{
+  "name": "title-prefix-marketplace",
+  "owner": {
+    "name": "Enrico Sabbadin"
+  },
+  "plugins": [
+    {
+      "name": "title-prefix",
+      "source": "./plugins/title-prefix",
+      "description": "Prefix session titles with [repo:branch] on /rename !name"
+    },
+    {
+      "name": "branch-guard",
+      "source": "./plugins/branch-guard",
+      "description": "Warn when a session is resumed on a different git branch than it last ran on"
+    }
+  ],
+  "description": "Claude Code helper plugins"
+}

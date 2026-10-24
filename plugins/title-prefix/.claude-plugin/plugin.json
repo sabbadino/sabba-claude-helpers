@@ -1,0 +1,8 @@
+{
+  "name": "title-prefix",
+  "version": "1.0.0",
+  "description": "Prefixes the session title with [repo:branch] when you /rename it starting with '!'.",
+  "author": {
+    "name": "Enrico Sabbadin"
+  }
+}
