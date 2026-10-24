@@ -27,12 +27,17 @@ A plugin can ship hooks and commands, but it cannot set the `statusLine` setting
 {
   "statusLine": {
     "type": "command",
-    "command": "node \"$HOME/.claude/branch-guard/statusline.cjs\""
+    "command": "node \"$HOME/.claude/branch-guard/branch-statusline.cjs\""
   }
 }
 ```
 
-The path is stable on purpose. The plugin's own folder changes with every version, so the plugin's hook copies the script to `~/.claude/branch-guard/statusline.cjs` each time a session starts. The first session after installing is therefore the first one that has the script in place.
+**Why this path, and where the file comes from.** Claude Code runs plugin hooks and commands from the plugin's install folder, `~/.claude/plugins/cache/title-prefix-marketplace/branch-guard/<version>/`. A `statusLine` setting could point there, but the folder name contains the plugin version, so the setting would break on every update. Instead, the plugin's `SessionStart` hook copies `branch-statusline.cjs` from the install folder to `~/.claude/branch-guard/branch-statusline.cjs`, under the same name, each time a session starts. The setting points at that copy, whose path never changes.
+
+Consequences:
+- The first session after installing is the first one that has the copy in place. Until then the status line prints nothing.
+- After a plugin update, the copy is refreshed at the next session start, so a running session keeps the old script until you restart it.
+- If you prefer no copy, point `statusLine` at the install folder directly and edit the version in the path after every update.
 
 ### Where to put the setting
 
@@ -56,7 +61,7 @@ If a repo already has a status line you want to keep, pass its script as an argu
 {
   "statusLine": {
     "type": "command",
-    "command": "node \"$HOME/.claude/branch-guard/statusline.cjs\" \"/path/to/the/other/statusline.cjs\""
+    "command": "node \"$HOME/.claude/branch-guard/branch-statusline.cjs\" \"/path/to/the/other/statusline.cjs\""
   }
 }
 ```

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // SessionStart hook. Two jobs:
-//   1. On every start, copy branch-statusline.cjs to a stable path (~/.claude/branch-guard/statusline.cjs),
+//   1. On every start, copy branch-statusline.cjs, under the same name, to a stable folder (~/.claude/branch-guard/),
 //      so the user's `statusLine` setting never has to point inside the plugin cache, whose folder
 //      changes with each plugin version.
 //   2. On resume, save the branch the session last ran on and, if it differs from the checked-out
@@ -21,7 +21,7 @@ process.stdin.on('end', () => {
 
     try {
       fs.mkdirSync(HOME_DIR, { recursive: true });
-      fs.copyFileSync(path.join(__dirname, 'branch-statusline.cjs'), path.join(HOME_DIR, 'statusline.cjs'));
+      fs.copyFileSync(path.join(__dirname, 'branch-statusline.cjs'), path.join(HOME_DIR, 'branch-statusline.cjs'));
     } catch {}
 
     const { transcript_path: transcript, cwd } = payload;
